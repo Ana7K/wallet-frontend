@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 246 250; --surface: 255 255 255; --surface2: 246 248 251; --line: 226 231 239;
+  --fg: 15 23 42; --muted: 100 112 133; --accent: 15 118 110; --accent-fg: 255 255 255;
+  --pos: 4 120 87; --neg: 190 18 60; --warn: 180 83 9; --gold: 161 128 70;
+  --shadow: 15 23 42; --grid: 15 23 42;
+  --orb1: 45 170 155; --orb2: 99 130 230; --orb3: 214 180 120; --orb-o: .26;
+  color-scheme: light;
+}
+.dark {
+  --bg: 7 11 20; --surface: 14 20 34; --surface2: 20 28 46; --line: 33 43 66;
+  --fg: 232 237 245; --muted: 139 150 171; --accent: 94 207 190; --accent-fg: 5 27 25;
+  --pos: 106 220 168; --neg: 247 135 140; --warn: 240 182 92; --gold: 214 190 140;
+  --shadow: 0 0 0; --grid: 148 163 184;
+  --orb1: 30 140 130; --orb2: 60 90 200; --orb3: 160 130 80; --orb-o: .3;
+  color-scheme: dark;
+}
+body { @apply bg-bg font-sans text-fg antialiased; }
+.num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.theme-switching, .theme-switching * { transition: background-color .35s ease, border-color .35s ease, color .35s ease, box-shadow .35s ease !important; }
+
+.atmos { position: fixed; inset: 0; z-index: -10; overflow: hidden; pointer-events: none; }
+.atmos::before { content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgb(var(--grid) / .06) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid) / .06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 10%, transparent 75%); }
+.atmos::after { content: ""; position: absolute; inset: 0; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.orb { position: absolute; border-radius: 9999px; filter: blur(100px); opacity: var(--orb-o); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
